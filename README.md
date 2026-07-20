@@ -1,5 +1,5 @@
 The below readme is a proposal, the first step if you are interestedin contributing/helping/leading is just to post hello on this thread:
-https://github.com/peachq-org/q-stdlib/discussions/2
+[https://github.com/peachq-org/q-stdlib/discussions/2](https://github.com/peachq-org/q-stdlib/discussions/2)
 
 # q Standard Library
 
