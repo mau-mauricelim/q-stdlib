@@ -1,3 +1,6 @@
+The below readme is a proposal, the first step if you are interestedin contributing/helping/leading is just to post hello on this thread:
+https://github.com/peachq-org/q-stdlib/discussions/2
+
 # q Standard Library
 
 The **q Standard Library** is a community effort to build a shared, open collection of libraries for the q language.
