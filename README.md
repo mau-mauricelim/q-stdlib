@@ -76,4 +76,10 @@ Rather than each implementation reinventing common libraries, this project aims 
 
 Whether you're using PeachQ, KX q or another compatible implementation, we hope these libraries help make the q ecosystem more portable, more collaborative and easier to build upon.
 
+# Existing Resources
+
+ - https://github.com/BuaBook/kdb-common/tree/master
+ - https://github.com/DataIntellectTech/TorQ
+ - https://github.com/finos/kdb
+
 Together, we can build an open ecosystem for q.
