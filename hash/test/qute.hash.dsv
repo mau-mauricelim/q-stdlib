@@ -1,0 +1,80 @@
+action | minver | code                                                                                         | repeat | ms | bytes | comment
+before |        | .lib.require`hash                                                                            |        |    |       | Initialize library
+before |        | .test.text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry"       |        |    |       | Setup test variables
+true   |        | 0xc67c698bbed2bcf002b9a03ed96300bd~md5`char$.Q.sha384 .test.text                             |        |    |       |
+true   |        | 0xaf94ea31b6a84fd9361d6e314a3e92fd~md5`char$.Q.sha512 .test.text                             |        |    |       |
+true   |        | 0x4327af160278b28ef9f0398e5a1468ff4f6d1b1a4485034ca4dc3535~.Q.sha224 .test.text              |        |    |       |
+true   |        | 0xab88d947d98a321bb894834fc88b687e031857d29dd5b943ef4d125b~.Q.sha512x224 .test.text          |        |    |       |
+true   |        | 0x098fc40c1bd1142a0adc3613e087e5d31c0e890d83f3501558e3ff3c4bea50d4~.Q.sha256 .test.text      |        |    |       |
+true   |        | 0x321495a0b97bf68cb073435a5effed3abf275f649320a640df379c5c9d59b6a8~.Q.sha512x256 .test.text  |        |    |       |
+before |        | .test.key:0x0102030405060708090a0b0c0d0e0f10111213141516171819                               |        |    |       | Setup test variables
+before |        | .test.data1:"Test With Truncation"                                                           |        |    |       | Setup test variables
+before |        | .test.data2:"Test Using Larger Than Block-Size Key - Hash Key First"                         |        |    |       | Setup test variables
+before |        | .test.data3:"Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"      |        |    |       | Setup test variables
+true   |        | 0x9294727a3638bb1c13f48ef8158bfc9d~.hmac.md5[16#0x0b;"Hi There"]                             |        |    |       |
+true   |        | 0x750c783e6ab0b503eaa86e310a5db738~.hmac.md5["Jefe";"what do ya want for nothing?"]          |        |    |       |
+true   |        | 0x56be34521d144c88dbb8c733f0e8b3f6~.hmac.md5[16#0xaa;50#0xdd]                                |        |    |       |
+true   |        | 0x697eaf0aca3a3aea3a75164746ffaa79~.hmac.md5[.test.key;50#0xcd]                              |        |    |       |
+true   |        | 0x56461ef2342edc00f9bab995690efd4c~.hmac.md5[16#0x0c;.test.data1]                            |        |    |       |
+true   |        | 0x6b1ab7fe4bd7bf8f0b62e6ce61b9d0cd~.hmac.md5[80#0xaa;.test.data2]                            |        |    |       |
+true   |        | 0x6f630fad67cda0ee1fb1f562db3aa53e~.hmac.md5[80#0xaa;.test.data3]                            |        |    |       |
+true   |        | 0xb617318655057264e28bc0b6fb378c8ef146be00~.hmac.sha1[20#0x0b;"Hi There"]                    |        |    |       |
+true   |        | 0xeffcdf6ae5eb2fa2d27416d5f184df9c259a7c79~.hmac.sha1["Jefe";"what do ya want for nothing?"] |        |    |       |
+true   |        | 0x125d7342b9ac11cd91a39af48aa17b4f63f175d3~.hmac.sha1[20#0xaa;50#0xdd]                       |        |    |       |
+true   |        | 0x4c9007f4026250c6bc8414f9bf50c86c2d7235da~.hmac.sha1[.test.key;50#0xcd]                     |        |    |       |
+true   |        | 0x4c1a03424b55e07fe7f27be1d58bb9324a9a5a04~.hmac.sha1[20#0x0c;.test.data1]                   |        |    |       |
+true   |        | 0xaa4ae5e15272d00e95705637ce8a3b55ed402112~.hmac.sha1[80#0xaa;.test.data2]                   |        |    |       |
+true   |        | 0xe8e99d0f45237d786d6bbaa7965c7808bbff1a91~.hmac.sha1[80#0xaa;.test.data3]                   |        |    |       |
+before |        | .test.secret:{.codec.textToB32@'b!(b:20 28 32 48 64)#\:"12345678901234567890"}[]             |        |    |       | Secret key length in bytes
+true   |        | "94287082"~.totp.i.totp[.hmac.sha1;30;8;.test.secret 20;1970.01.01D00:00:59]                 |        |    |       |
+true   |        | "32201820"~.totp.i.totp[.hmac.sha224;30;8;.test.secret 28;1970.01.01D00:00:59]               |        |    |       |
+true   |        | "46119246"~.totp.i.totp[.hmac.sha256;30;8;.test.secret 32;1970.01.01D00:00:59]               |        |    |       |
+true   |        | "12260385"~.totp.i.totp[.hmac.sha384;30;8;.test.secret 48;1970.01.01D00:00:59]               |        |    |       |
+true   |        | "90693936"~.totp.i.totp[.hmac.sha512;30;8;.test.secret 64;1970.01.01D00:00:59]               |        |    |       |
+true   |        | "94469289"~.totp.i.totp[.hmac.sha512x224;30;8;.test.secret 28;1970.01.01D00:00:59]           |        |    |       |
+true   |        | "00441233"~.totp.i.totp[.hmac.sha512x256;30;8;.test.secret 32;1970.01.01D00:00:59]           |        |    |       |
+true   |        | "07081804"~.totp.i.totp[.hmac.sha1;30;8;.test.secret 20;2005.03.18D01:58:29]                 |        |    |       |
+true   |        | "82019503"~.totp.i.totp[.hmac.sha224;30;8;.test.secret 28;2005.03.18D01:58:29]               |        |    |       |
+true   |        | "68084774"~.totp.i.totp[.hmac.sha256;30;8;.test.secret 32;2005.03.18D01:58:29]               |        |    |       |
+true   |        | "93607533"~.totp.i.totp[.hmac.sha384;30;8;.test.secret 48;2005.03.18D01:58:29]               |        |    |       |
+true   |        | "25091201"~.totp.i.totp[.hmac.sha512;30;8;.test.secret 64;2005.03.18D01:58:29]               |        |    |       |
+true   |        | "73230696"~.totp.i.totp[.hmac.sha512x224;30;8;.test.secret 28;2005.03.18D01:58:29]           |        |    |       |
+true   |        | "97406494"~.totp.i.totp[.hmac.sha512x256;30;8;.test.secret 32;2005.03.18D01:58:29]           |        |    |       |
+true   |        | "14050471"~.totp.i.totp[.hmac.sha1;30;8;.test.secret 20;2005.03.18D01:58:31]                 |        |    |       |
+true   |        | "98501000"~.totp.i.totp[.hmac.sha224;30;8;.test.secret 28;2005.03.18D01:58:31]               |        |    |       |
+true   |        | "67062674"~.totp.i.totp[.hmac.sha256;30;8;.test.secret 32;2005.03.18D01:58:31]               |        |    |       |
+true   |        | "30635264"~.totp.i.totp[.hmac.sha384;30;8;.test.secret 48;2005.03.18D01:58:31]               |        |    |       |
+true   |        | "99943326"~.totp.i.totp[.hmac.sha512;30;8;.test.secret 64;2005.03.18D01:58:31]               |        |    |       |
+true   |        | "45148669"~.totp.i.totp[.hmac.sha512x224;30;8;.test.secret 28;2005.03.18D01:58:31]           |        |    |       |
+true   |        | "46180615"~.totp.i.totp[.hmac.sha512x256;30;8;.test.secret 32;2005.03.18D01:58:31]           |        |    |       |
+true   |        | "89005924"~.totp.i.totp[.hmac.sha1;30;8;.test.secret 20;2009.02.13D23:31:30]                 |        |    |       |
+true   |        | "25631841"~.totp.i.totp[.hmac.sha224;30;8;.test.secret 28;2009.02.13D23:31:30]               |        |    |       |
+true   |        | "91819424"~.totp.i.totp[.hmac.sha256;30;8;.test.secret 32;2009.02.13D23:31:30]               |        |    |       |
+true   |        | "29066410"~.totp.i.totp[.hmac.sha384;30;8;.test.secret 48;2009.02.13D23:31:30]               |        |    |       |
+true   |        | "93441116"~.totp.i.totp[.hmac.sha512;30;8;.test.secret 64;2009.02.13D23:31:30]               |        |    |       |
+true   |        | "15216427"~.totp.i.totp[.hmac.sha512x224;30;8;.test.secret 28;2009.02.13D23:31:30]           |        |    |       |
+true   |        | "69345394"~.totp.i.totp[.hmac.sha512x256;30;8;.test.secret 32;2009.02.13D23:31:30]           |        |    |       |
+true   |        | "69279037"~.totp.i.totp[.hmac.sha1;30;8;.test.secret 20;2033.05.18D03:33:20]                 |        |    |       |
+true   |        | "97691324"~.totp.i.totp[.hmac.sha224;30;8;.test.secret 28;2033.05.18D03:33:20]               |        |    |       |
+true   |        | "90698825"~.totp.i.totp[.hmac.sha256;30;8;.test.secret 32;2033.05.18D03:33:20]               |        |    |       |
+true   |        | "45679189"~.totp.i.totp[.hmac.sha384;30;8;.test.secret 48;2033.05.18D03:33:20]               |        |    |       |
+true   |        | "38618901"~.totp.i.totp[.hmac.sha512;30;8;.test.secret 64;2033.05.18D03:33:20]               |        |    |       |
+true   |        | "24095659"~.totp.i.totp[.hmac.sha512x224;30;8;.test.secret 28;2033.05.18D03:33:20]           |        |    |       |
+true   |        | "14506846"~.totp.i.totp[.hmac.sha512x256;30;8;.test.secret 32;2033.05.18D03:33:20]           |        |    |       |
+true   |        | "65353130"~.totp.i.totp[.hmac.sha1;30;8;.test.secret 20;2603.10.11T11:33:20]                 |        |    |       | Using timestamp would cause an overflow error
+true   |        | "81596645"~.totp.i.totp[.hmac.sha224;30;8;.test.secret 28;2603.10.11T11:33:20]               |        |    |       |
+true   |        | "77737706"~.totp.i.totp[.hmac.sha256;30;8;.test.secret 32;2603.10.11T11:33:20]               |        |    |       |
+true   |        | "33578931"~.totp.i.totp[.hmac.sha384;30;8;.test.secret 48;2603.10.11T11:33:20]               |        |    |       |
+true   |        | "47863826"~.totp.i.totp[.hmac.sha512;30;8;.test.secret 64;2603.10.11T11:33:20]               |        |    |       |
+true   |        | "83924651"~.totp.i.totp[.hmac.sha512x224;30;8;.test.secret 28;2603.10.11T11:33:20]           |        |    |       |
+true   |        | "83211259"~.totp.i.totp[.hmac.sha512x256;30;8;.test.secret 32;2603.10.11T11:33:20]           |        |    |       |
+before |        | .util.randSeed[];system"S"                                                                   |        |    |       | Set random seed
+run    |        | .totp.md5[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                              |        |    |       |
+run    |        | .totp.sha1[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                             |        |    |       |
+run    |        | .totp.sha224[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                           |        |    |       |
+run    |        | .totp.sha256[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                           |        |    |       |
+run    |        | .totp.sha384[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                           |        |    |       |
+run    |        | .totp.sha512[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                           |        |    |       |
+run    |        | .totp.sha512x224[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                       |        |    |       |
+run    |        | .totp.sha512x256[rand 30 60;rand 6 8;(rand 64)?.Q.b32]                                       |        |    |       |
+after  |        | delete from`.test                                                                            |        |    |       | Cleanup .test namespace
