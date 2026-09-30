@@ -35,4 +35,37 @@
 .totp.sha512x224:.totp.totp[`sha512x224;;;];
 .totp.sha512x256:.totp.totp[`sha512x256;;;];
 
-/ With this library, you can build and actual TOTP Authenticator in q :)
+// Simple demo!
+/ Run TOTP Authenticator
+/ @param x - string - base32 encoded text
+/ @example - .totp.i.run[`sha1;30;6;"JBSWY3DPEHPK3PXP"]
+.totp.i.run:{[algo;step;len;k]
+    -1"Press Ctrl+C to stop";
+    .[{[algo;step;len;k]
+        totp:.totp.i.totp[.hmac algo;step;len;k];
+        / Hide cursor
+        1"\033[?25l";
+        while[1b;
+            seconds:.util.unixTimeStamp t:.z.p;
+            elapsed:1+seconds mod step;
+            otps:totp each t+`second$0,step;
+            otp:first otps;
+            nextOtp:last otps;
+            / Clear line
+            1"\r\033[K";;
+            1" "sv(string t;"[OTP: ",otp,"]";"[NEXT: ",nextOtp,"]";string[elapsed],"/",string[step],"s");
+            / Sleep
+            {st:.z.p;while .z.p<st+x}00:00:01;
+            ];
+        / Unhide cursor
+        };(algo;step;len;k);{1"\033[?25h";$[x~"stop";-1"";'x]}];
+    };
+
+.totp.run.md5:.totp.i.run[`md5;;;];
+.totp.run.sha1:.totp.i.run[`sha1;;;];
+.totp.run.sha224:.totp.i.run[`sha224;;;];
+.totp.run.sha256:.totp.i.run[`sha256;;;];
+.totp.run.sha384:.totp.i.run[`sha384;;;];
+.totp.run.sha512:.totp.i.run[`sha512;;;];
+.totp.run.sha512x224:.totp.i.run[`sha512x224;;;];
+.totp.run.sha512x256:.totp.i.run[`sha512x256;;;];
